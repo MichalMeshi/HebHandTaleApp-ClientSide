@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +25,15 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.test1.R;
 import com.example.test1.databinding.FragmentFirstBinding;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import com.example.test1.ServerConnect;
 
 public class FirstFragment extends Fragment {
 
@@ -33,18 +43,25 @@ public class FirstFragment extends Fragment {
     private final String[] cameraPermissions = {Manifest.permission.CAMERA};
     private final int CAMERA_PERMISSION_REQUEST_CODE = 101;
     private final ActivityResultLauncher<Intent> cameraLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == getActivity().RESULT_OK) {
-                    // here i need to send the image to the decode API ----------------------------
-                    // Photo capture succeeded, navigate to the second fragment
-                    NavHostFragment.findNavController(this)
-                            .navigate(R.id.action_FirstFragment_to_SecondFragment);
-                } else {
-                    // Photo capture failed or was canceled
-                    // Handle accordingly
-                }
-            });
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        if (result.getResultCode() == getActivity().RESULT_OK) {
+                            Intent data = result.getData();
+                            if (data != null) {
+                                Bundle extras = data.getExtras();
+                                Bitmap imageBitmap = (Bitmap) extras.get("data");
 
+                                saveImageToFile(imageBitmap);
+
+                                // Navigate to the second fragment after taking the photo
+                                NavHostFragment.findNavController(this)
+                                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                            }
+                        } else {
+                            // Photo capture failed or was canceled
+                            // Handle accordingly
+                        }
+                    });
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -66,6 +83,24 @@ public class FirstFragment extends Fragment {
             }
         });
     }
+    private void saveImageToFile(Bitmap imageBitmap) {
+//        String imageName = "captured_image.jpg";
+//
+//        File storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File imageFile = new File(storageDir, imageName);
+//        try {
+//            FileOutputStream fos = new FileOutputStream(imageFile);
+//            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//            fos.close();
+//            Log.d("ImageSave", "Image saved to: " + imageFile.getAbsolutePath());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            Log.e("ImageSave", "Failed to save image: " + e.getMessage());
+//        }
+        ServerConnect.sendImageNameToServer("michtav");
+    }
+
+
 
     private void checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
