@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.example.test1.R;
 import com.example.test1.databinding.FragmentFirstBinding;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -49,9 +52,14 @@ public class FirstFragment extends Fragment {
                             Intent data = result.getData();
                             if (data != null) {
                                 Bundle extras = data.getExtras();
-                                Bitmap imageBitmap = (Bitmap) extras.get("data");
+//                                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                                Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
 
-                                saveImageToFile(imageBitmap);
+                                try {
+                                    saveImageToFile(imageBitmap);
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
 
                                 // Navigate to the second fragment after taking the photo
                                 NavHostFragment.findNavController(this)
@@ -83,21 +91,16 @@ public class FirstFragment extends Fragment {
             }
         });
     }
-    private void saveImageToFile(Bitmap imageBitmap) {
-//        String imageName = "captured_image.jpg";
-//
-//        File storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//        File imageFile = new File(storageDir, imageName);
-//        try {
-//            FileOutputStream fos = new FileOutputStream(imageFile);
-//            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//            fos.close();
-//            Log.d("ImageSave", "Image saved to: " + imageFile.getAbsolutePath());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Log.e("ImageSave", "Failed to save image: " + e.getMessage());
-//        }
-        ServerConnect.sendImageNameToServer("michtav");
+    private void saveImageToFile(Bitmap imageBitmap) throws Exception {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] imageBytes = byteArrayOutputStream.toByteArray();
+
+        // Encode the byte array to Base64
+        String base64Image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+        ServerConnectBase64.sendBase64ImgToServer(base64Image);
+        ServerConnect.sendImageNameToServer("hello");
     }
 
 

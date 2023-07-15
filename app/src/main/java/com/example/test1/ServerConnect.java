@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class ServerConnect {
     static void sendImageNameToServer(String imageName) {
-        String serverURL = "http://10.0.2.2:5000/recognize_word_by_name/michtav";
+        String serverURL = "http://10.0.2.2:5000/recognize_word_by_name/hello";
 
         AsyncTask.execute(() -> {
             try {
