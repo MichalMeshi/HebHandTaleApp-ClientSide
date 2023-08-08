@@ -30,6 +30,7 @@ android {
         exclude 'META-INF/DEPENDENCIES'
     }
     buildFeatures {
+        dataBinding true
         viewBinding true
     }
 }

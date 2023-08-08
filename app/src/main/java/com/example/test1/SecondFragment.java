@@ -1,6 +1,7 @@
 package com.example.test1;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +30,21 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+        // Hide the textview_second and show the loading textview
+        binding.textviewSecond.setVisibility(View.VISIBLE);
+//        binding.textviewLoading.setVisibility(View.VISIBLE);
+
+        // Simulate a loading process
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
+            public void run() {
+                // After the loading time is done, navigate to the FirstFragment
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
-        });
+        }, 2000); // 2000 milliseconds (2 seconds) - Change this value as per your requirement
     }
+
 
     @Override
     public void onDestroyView() {
