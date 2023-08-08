@@ -1,0 +1,29 @@
+<!-- res/layout/activity_word_list.xml -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Add a TextView to display the message -->
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The similar words that recognized are: "
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"
+        android:padding="16dp" />
+
+    <!-- Add a ListView to display the list of words -->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:padding="16dp" />
+
+</LinearLayout>

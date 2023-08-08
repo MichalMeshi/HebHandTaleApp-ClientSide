@@ -1,6 +1,7 @@
 package com.example.test1;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -87,8 +88,10 @@ public class FirstFragment extends Fragment {
         byte[] imageBytes = byteArrayOutputStream.toByteArray();
         String base64Image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-        new ServerConnectionTask().execute(base64Image);
+        // Pass the context to the ServerConnectionTask constructor
+        new ServerConnectionTask(requireContext()).execute(base64Image);
     }
+
 
     private void checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
@@ -128,15 +131,23 @@ public class FirstFragment extends Fragment {
 
     private class ServerConnectionTask extends AsyncTask<String, Void, String> {
 
+        private Context context; // Add a Context field
+
+        ServerConnectionTask(Context context) {
+            this.context = context;
+        }
+
         @Override
         protected String doInBackground(String... params) {
             String base64Image = params[0];
             try {
-                return ServerConnectBase64.sendBase64ImgToServer(base64Image);
+                // Pass the context to the sendBase64ImgToServer method
+                ServerConnectBase64.sendBase64ImgToServer(context, base64Image);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
         }
     }
+
 }

@@ -1,5 +1,7 @@
 package com.example.test1;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import okhttp3.MediaType;
@@ -20,8 +22,8 @@ public class ServerConnectBase64 {
             .readTimeout(50, TimeUnit.SECONDS)
             .build();
 
-    static String sendBase64ImgToServer(String base64Image) throws Exception {
-        String decodedResponse = null;
+    // This method should be called from an Activity or Fragment
+    static void sendBase64ImgToServer(Context context, String base64Image) {
         String url = "http://10.0.2.2:5000/recognize_word_by_content";
         MediaType mediaType = MediaType.parse("image/png"); // Or image/jpeg, depending on the image format
         RequestBody requestBody = RequestBody.create(base64Image, mediaType);
@@ -34,16 +36,21 @@ public class ServerConnectBase64 {
             if (response.isSuccessful()) {
                 assert response.body() != null;
                 String responseString = response.body().string();
-                decodedResponse = Unicode.decodeUnicode(responseString);
+                String decodedResponse = Unicode.decodeUnicode(responseString);
                 System.out.println(decodedResponse);
+
+                // Start the WordListActivity and pass the decoded response as an extra
+                Intent intent = new Intent(context, WordListActivity.class);
+                intent.putExtra("wordList", decodedResponse);
+                context.startActivity(intent);
+
             } else {
-                // Handle unsuccessful response here (e.g., log or throw an exception)
-                System.err.println("Unsuccessful response: " + response.code() + " " + response.message());
+                // Handle unsuccessful response here (e.g., log or show an error message)
+                Log.e("ServerConnectBase64", "Unsuccessful response: " + response.code() + " " + response.message());
             }
         } catch (IOException e) {
-            // Handle IO Exception here (e.g., log or throw a custom exception)
+            // Handle IO Exception here (e.g., log or show an error message)
             e.printStackTrace();
         }
-        return decodedResponse;
     }
 }
