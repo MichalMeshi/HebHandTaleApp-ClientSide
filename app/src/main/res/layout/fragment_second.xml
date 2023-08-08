@@ -6,19 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
 
-
-    <TextView
-        android:id="@+id/textview_second"
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:text="Loading..."
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        style="@android:style/Widget.ProgressBar.Large"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

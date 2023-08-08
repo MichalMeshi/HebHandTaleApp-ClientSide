@@ -21,18 +21,15 @@ public class SecondFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Hide the textview_second and show the loading textview
-        binding.textviewSecond.setVisibility(View.VISIBLE);
-//        binding.textviewLoading.setVisibility(View.VISIBLE);
+        // Hide the ProgressBar initially
+        binding.progressBar.setVisibility(View.VISIBLE);
 
         // Simulate a loading process
         new Handler().postDelayed(new Runnable() {
@@ -42,14 +39,12 @@ public class SecondFragment extends Fragment {
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
-        }, 2000); // 2000 milliseconds (2 seconds) - Change this value as per your requirement
+        }, 8000); // 2000 milliseconds (2 seconds) - Change this value as per your requirement
     }
-
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }
