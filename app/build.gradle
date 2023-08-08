@@ -15,6 +15,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_10
+        targetCompatibility JavaVersion.VERSION_1_10
+    }
 
     buildTypes {
         release {
@@ -22,9 +26,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
     }
     buildFeatures {
         viewBinding true
@@ -32,7 +35,10 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.google.firebase:firebase-crashlytics:18.4.0'
+    //implementation 'org.apache.httpcomponents:httpclient:4.5.13' // Use the latest version available
+    testImplementation "org.robolectric:robolectric:4.6.1" // Use the latest version available
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

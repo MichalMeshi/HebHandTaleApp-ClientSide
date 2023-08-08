@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -19,24 +17,15 @@ import android.view.ViewGroup;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.test1.R;
 import com.example.test1.databinding.FragmentFirstBinding;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import com.example.test1.ServerConnect;
 
 public class FirstFragment extends Fragment {
 
@@ -52,8 +41,8 @@ public class FirstFragment extends Fragment {
                             Intent data = result.getData();
                             if (data != null) {
                                 Bundle extras = data.getExtras();
-//                                Bitmap imageBitmap = (Bitmap) extras.get("data");
                                 Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
+//                                Bitmap imageBitmap = (Bitmap) extras.get("data");
 
                                 try {
                                     saveImageToFile(imageBitmap);
@@ -70,15 +59,14 @@ public class FirstFragment extends Fragment {
                             // Handle accordingly
                         }
                     });
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -91,19 +79,16 @@ public class FirstFragment extends Fragment {
             }
         });
     }
-    private void saveImageToFile(Bitmap imageBitmap) throws Exception {
+
+    private void saveImageToFile(Bitmap i) {
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] imageBytes = byteArrayOutputStream.toByteArray();
-
-        // Encode the byte array to Base64
         String base64Image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-        ServerConnectBase64.sendBase64ImgToServer(base64Image);
-        ServerConnect.sendImageNameToServer("hello");
+        new ServerConnectionTask().execute(base64Image);
     }
-
-
 
     private void checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
@@ -118,7 +103,6 @@ public class FirstFragment extends Fragment {
                     CAMERA_PERMISSION_REQUEST_CODE);
         }
     }
-
 
     private void openCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -140,5 +124,19 @@ public class FirstFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private class ServerConnectionTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String base64Image = params[0];
+            try {
+                return ServerConnectBase64.sendBase64ImgToServer(base64Image);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }
