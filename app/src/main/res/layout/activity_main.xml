@@ -28,7 +28,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorError"
+            android:background="@color/design_default_color_error"
             app:title="Hebrew Translate"
             app:popupTheme="@style/Theme.Test1.PopupOverlay" />
 
