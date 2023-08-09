@@ -3,13 +3,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- TextView for the first word and message -->
+
+    <!-- TextView for the first word -->
     <TextView
         android:id="@+id/wordTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text=""
+        android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:background="@drawable/rectangle_background"
         android:padding="8dp"
@@ -17,10 +19,23 @@
         android:cursorVisible="false"
         android:textIsSelectable="true"/>
 
+    <!-- TextView for the message -->
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="More Words..."
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
 
 </LinearLayout>
