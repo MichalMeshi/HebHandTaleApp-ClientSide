@@ -3,14 +3,21 @@ package com.example.test1;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.test1.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+// ... Your existing imports and code ...
+
+// ... Your existing imports and code ...
 
 public class WordListActivity extends AppCompatActivity {
 
@@ -21,7 +28,7 @@ public class WordListActivity extends AppCompatActivity {
 
         // Get the decodedResponse from the intent's extras
         String decodedResponse = getIntent().getStringExtra("wordList");
-        ArrayList<String> wordList=new ArrayList<>();;
+        ArrayList<String> wordList = new ArrayList<>();
 
         try {
             // Parse the JSON string into a JSON object
@@ -51,16 +58,35 @@ public class WordListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Display the words in a ListView (or use RecyclerView if preferred)
+        // Display the words in a ListView
         ListView listView = findViewById(R.id.listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, wordList);
+
+        // Set the message and the first word in the wordTextView
+        TextView wordTextView = findViewById(R.id.wordTextView);
+        wordTextView.setText("The recognized word: " + wordList.get(0)); // Set the message and first word
+
+        // Handle click event for the wordTextView
+        wordTextView.setOnClickListener(view -> {
+            String selectedWord = wordList.get(0); // First word from the list
+            // Show the selected word in the terminal or a message
+            System.out.println("Selected word: " + selectedWord);
+            // TranslateAPI t = new TranslateAPI();
+            // t.translateWord(selectedWord);
+        });
+
+        // Exclude the first word from the rest of the list
+        ArrayList<String> restOfWordList = new ArrayList<>(wordList.subList(1, wordList.size()));
+
+        // Create an adapter for the rest of the words
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, restOfWordList);
         listView.setAdapter(adapter);
 
-        // Set an item click listener for the ListView to handle user selection
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedWord = wordList.get(position);
+            String selectedWord = restOfWordList.get(position); // Adjust position for the word list
             // Show the selected word in the terminal (you can replace this with any other action)
             System.out.println("Selected word: " + selectedWord);
+            // TranslateAPI t = new TranslateAPI();
+            // t.translateWord(selectedWord);
         });
     }
 }

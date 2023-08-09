@@ -39,7 +39,7 @@ public class SecondFragment extends Fragment {
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
-        }, 8000); // 2000 milliseconds (2 seconds) - Change this value as per your requirement
+        }, 20000); // 2000 milliseconds (2 seconds) - Change this value as per your requirement
     }
 
     @Override
