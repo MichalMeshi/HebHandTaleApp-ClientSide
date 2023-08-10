@@ -25,54 +25,60 @@ import okhttp3.Response;
 public class TranslateAPI {
     private static final String BASE_URL = "http:/192.168.68.110:5000";
 
-    public static String translateWord(String word, String language){
-        OkHttpClient client = new OkHttpClient();
-
-        // Build the URL for the GET request
-        String url = BASE_URL + "/translate_word_with_google_api/" + word + "/" + language;
-
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
-
-        try {
-            Response response = client.newCall(request).execute();
-            if (response.isSuccessful()) {
-                String responseBody = response.body().string();
-                // The response seems to be a simple string, not a JSON object
-                System.out.println("Translation: " + responseBody);
-                return responseBody; // Return the response as is
-            } else {
-                System.out.println("Translation failed. Status code: " + response.code());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
+    public interface TranslationCallback {
+        void onTranslationSuccess(String translation);
+        void onTranslationFailure(String errorMessage);
     }
 
+    public void translateWord(String word, String language, TranslationCallback callback) {
+        new TranslationTask(callback).execute(word, language);
+    }
 
-//    public void translateWord(String selectedWord) throws IOException, KeyManagementException, NoSuchAlgorithmException {
-//        // Set the custom SSL context in OkHttpClient
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .build();
-//        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-//        RequestBody body = RequestBody.create(mediaType, "q=Hello%2C%20world!&target=es&source=en");
-//        Request request = new Request.Builder()
-//                .url("https://google-translate1.p.rapidapi.com/language/translate/v2")
-//                .post(body)
-//                .addHeader("content-type", "application/x-www-form-urlencoded")
-//                .addHeader("Accept-Encoding", "application/gzip")
-//                .addHeader("X-RapidAPI-Key", "cb66237962msh072cf932d6327eep1b0f92jsnc07647de39d9")
-//                .addHeader("X-RapidAPI-Host", "google-translate1.p.rapidapi.com")
-//                .build();
-//
-//        Response response = client.newCall(request).execute();
-//        int statusCode = response.code();
-//        String responseBody = response.body().string();
-//        System.out.println("Status Code: " + statusCode);
-//        System.out.println("Response Body: " + responseBody);
-//    }
+    private static class TranslationTask extends AsyncTask<String, Void, String> {
+        private TranslationCallback callback;
+
+        public TranslationTask(TranslationCallback callback) {
+            this.callback = callback;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String word = params[0];
+            String language = params[1];
+
+            OkHttpClient client = new OkHttpClient();
+
+            // Build the URL for the GET request
+            String url = BASE_URL + "/translate_word_with_google_api/" + word + "/" + language;
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return "Translation failed. Status code: " + response.code();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Translation failed. Exception: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (callback != null) {
+                if (result.startsWith("Translation failed")) {
+                    callback.onTranslationFailure(result);
+                } else {
+                    callback.onTranslationSuccess(result);
+                }
+            }
+        }
+    }
 }
+

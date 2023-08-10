@@ -37,6 +37,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".WordListActivity" />
         </activity>
+        <activity
+            android:name=".TranslationDisplayActivity"
+            android:label="Translation Display Activity">
+        </activity>
     </application>
 
 </manifest>

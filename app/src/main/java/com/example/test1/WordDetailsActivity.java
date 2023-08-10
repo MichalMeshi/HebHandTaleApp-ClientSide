@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,6 +19,8 @@ public class WordDetailsActivity extends AppCompatActivity {
 
     private Spinner languageSpinner;
     private TextView wordTextView;
+    private Button translateButton;
+    private TextView translationTextView;
 
     private Map<String, String> languageMap;
 
@@ -29,8 +32,7 @@ public class WordDetailsActivity extends AppCompatActivity {
         // Initialize views
         wordTextView = findViewById(R.id.wordTextView);
         languageSpinner = findViewById(R.id.languageSpinner);
-
-        // Create a map of language names to language codes
+        translateButton = findViewById(R.id.translateButton);
         initializeLanguageMap();
 
         // Get the selected word from the intent
@@ -59,6 +61,36 @@ public class WordDetailsActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // Do nothing
+            }
+        });
+        translateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the selected language and the word from the UI
+                String selectedLanguage = languageSpinner.getSelectedItem().toString();
+                String languageCode = languageMap.get(selectedLanguage);
+                String selectedWord = wordTextView.getText().toString().replace("Selected word: ", "");
+
+                // Call the translateWord method
+                TranslateAPI translateAPI = new TranslateAPI();
+                translateAPI.translateWord(selectedWord, languageCode, new TranslateAPI.TranslationCallback() {
+                    @Override
+                    public void onTranslationSuccess(String translation) {
+                        // Handle the successful translation result
+                        System.out.println("Translation: " + translation);
+                        // Open a new activity to display the translation
+                        Intent translationIntent = new Intent(WordDetailsActivity.this, TranslationDisplayActivity.class);
+                        translationIntent.putExtra("translation", translation);
+                        startActivity(translationIntent);
+
+                    }
+
+                    @Override
+                    public void onTranslationFailure(String errorMessage) {
+                        // Handle the translation failure
+                        System.out.println("Translation failed: " + errorMessage);
+                    }
+                });
             }
         });
 
@@ -175,5 +207,7 @@ public class WordDetailsActivity extends AppCompatActivity {
     private void displayLanguageCode(String code) {
         // Display the language code
         System.out.println(code);
+
     }
+
 }

@@ -95,12 +95,6 @@ public class WordListActivity extends AppCompatActivity {
             Intent intent = new Intent(WordListActivity.this, WordDetailsActivity.class);
             intent.putExtra("selectedWord", selectedWord);
             startActivity(intent);
-//             TranslateAPI t = new TranslateAPI();
-//            try {
-//                t.translateWord(selectedWord);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
         });
     }
 }

@@ -81,8 +81,8 @@ public class FirstFragment extends Fragment {
         });
     }
 
-    private void saveImageToFile(Bitmap imageBitmap) {
-        //Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
+    private void saveImageToFile(Bitmap i) {
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] imageBytes = byteArrayOutputStream.toByteArray();
