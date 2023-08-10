@@ -9,4 +9,6 @@
 
     <string name="hello_first_fragment">Hello Michal</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="placeholder_for_the_selected_word">Placeholder for the selected word</string>
+    <string name="selected_word">Selected word:</string>
 </resources>

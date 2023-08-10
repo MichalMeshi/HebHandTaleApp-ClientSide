@@ -1,5 +1,6 @@
 package com.example.test1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 // ... Your existing imports and code ...
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 // ... Your existing imports and code ...
 
 public class WordListActivity extends AppCompatActivity {
-
+    String selectedWord="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +69,13 @@ public class WordListActivity extends AppCompatActivity {
 
         // Handle click event for the wordTextView
         wordTextView.setOnClickListener(view -> {
-            String selectedWord = wordList.get(0); // First word from the list
+            selectedWord = wordList.get(0); // First word from the list
             // Show the selected word in the terminal or a message
             System.out.println("Selected word: " + selectedWord);
+
+            Intent intent = new Intent(WordListActivity.this, WordDetailsActivity.class);
+            intent.putExtra("selectedWord", selectedWord);
+            startActivity(intent);
             // TranslateAPI t = new TranslateAPI();
             // t.translateWord(selectedWord);
         });
@@ -82,11 +88,19 @@ public class WordListActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedWord = restOfWordList.get(position); // Adjust position for the word list
+            selectedWord = restOfWordList.get(position); // Adjust position for the word list
             // Show the selected word in the terminal (you can replace this with any other action)
             System.out.println("Selected word: " + selectedWord);
-            // TranslateAPI t = new TranslateAPI();
-            // t.translateWord(selectedWord);
+
+            Intent intent = new Intent(WordListActivity.this, WordDetailsActivity.class);
+            intent.putExtra("selectedWord", selectedWord);
+            startActivity(intent);
+//             TranslateAPI t = new TranslateAPI();
+//            try {
+//                t.translateWord(selectedWord);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
         });
     }
 }

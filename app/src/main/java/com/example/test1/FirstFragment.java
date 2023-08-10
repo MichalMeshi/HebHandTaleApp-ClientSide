@@ -42,8 +42,8 @@ public class FirstFragment extends Fragment {
                             Intent data = result.getData();
                             if (data != null) {
                                 Bundle extras = data.getExtras();
-                                Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
-//                                Bitmap imageBitmap = (Bitmap) extras.get("data");
+//                                Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
+                                Bitmap imageBitmap = (Bitmap) extras.get("data");
 
                                 try {
                                     saveImageToFile(imageBitmap);
@@ -81,8 +81,8 @@ public class FirstFragment extends Fragment {
         });
     }
 
-    private void saveImageToFile(Bitmap i) {
-        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
+    private void saveImageToFile(Bitmap imageBitmap) {
+        //Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] imageBytes = byteArrayOutputStream.toByteArray();

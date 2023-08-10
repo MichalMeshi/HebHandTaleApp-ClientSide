@@ -29,6 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".WordDetailsActivity"
+            android:label="Word Details"
+            android:parentActivityName=".WordListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".WordListActivity" />
+        </activity>
     </application>
 
 </manifest>
