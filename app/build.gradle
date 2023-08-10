@@ -50,4 +50,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation 'com.konghq:unirest-java:3.11.12' // Replace with the latest version
+
 }
