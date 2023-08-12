@@ -41,6 +41,10 @@
             android:name=".TranslationDisplayActivity"
             android:label="Translation Display Activity">
         </activity>
+        <activity
+            android:name=".GoogleSignIn"
+            android:label="Google Sing IN">
+        </activity>
     </application>
 
 </manifest>

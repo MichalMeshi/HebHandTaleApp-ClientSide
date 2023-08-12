@@ -25,6 +25,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.test1.databinding.FragmentFirstBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.io.ByteArrayOutputStream;
 
@@ -35,6 +40,9 @@ public class FirstFragment extends Fragment {
     private static final int REQUEST_IMAGE_CAPTURE = 200;
     private final String[] cameraPermissions = {Manifest.permission.CAMERA};
     private final int CAMERA_PERMISSION_REQUEST_CODE = 101;
+    GoogleSignInClient gsc;
+    GoogleSignInOptions gso;
+
     private final ActivityResultLauncher<Intent> cameraLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                     result -> {
@@ -79,6 +87,21 @@ public class FirstFragment extends Fragment {
                 checkCameraPermission();
             }
         });
+        binding.buttonSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Navigate to the GoogleSignInFragment
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_GoogleSignInFragment);
+            }
+        });
+        binding.buttonSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
+            }
+        });
+
     }
 
     private void saveImageToFile(Bitmap i) {
@@ -148,6 +171,18 @@ public class FirstFragment extends Fragment {
             }
             return null;
         }
+    }
+    void signOut(){
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(requireActivity(),gso);
+
+        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(Task<Void> task) {
+                System.out.println("Sign out succseesfuly");
+                startActivity(new Intent(requireActivity(),MainActivity.class));
+            }
+        });
     }
 
 }

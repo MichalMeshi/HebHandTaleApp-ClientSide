@@ -15,7 +15,14 @@
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/googleSignInFragment"
+        android:name="com.example.test1.GoogleSignInFragment"
+        android:label="GoogleSignInFragment"
+        tools:layout="@layout/fragment_google_sign_in" />
+    <action
+        android:id="@+id/action_FirstFragment_to_GoogleSignInFragment"
+        app:destination="@id/googleSignInFragment" />
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.test1.SecondFragment"
