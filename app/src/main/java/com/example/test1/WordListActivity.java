@@ -72,6 +72,8 @@ public class WordListActivity extends AppCompatActivity {
             selectedWord = wordList.get(0); // First word from the list
             // Show the selected word in the terminal or a message
             System.out.println("Selected word: " + selectedWord);
+            // Call the sendWordToServer function when the user selects a word
+            SendWordToSaveInDB.sendWordToServer(selectedWord);
 
             Intent intent = new Intent(WordListActivity.this, WordDetailsActivity.class);
             intent.putExtra("selectedWord", selectedWord);
@@ -91,6 +93,8 @@ public class WordListActivity extends AppCompatActivity {
             selectedWord = restOfWordList.get(position); // Adjust position for the word list
             // Show the selected word in the terminal (you can replace this with any other action)
             System.out.println("Selected word: " + selectedWord);
+            // Call the sendWordToServer function when the user selects a word
+            SendWordToSaveInDB.sendWordToServer(selectedWord);
 
             Intent intent = new Intent(WordListActivity.this, WordDetailsActivity.class);
             intent.putExtra("selectedWord", selectedWord);

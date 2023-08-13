@@ -23,7 +23,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class TranslateAPI {
-    private static final String BASE_URL = "http:/192.168.68.110:5000";
+    private static final String BASE_URL = "http:/192.168.68.107:5000";
 
     public interface TranslationCallback {
         void onTranslationSuccess(String translation);
