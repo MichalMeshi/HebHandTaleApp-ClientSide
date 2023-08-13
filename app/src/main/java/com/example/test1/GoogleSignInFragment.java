@@ -25,6 +25,7 @@ public class GoogleSignInFragment extends Fragment {
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     ImageView googleBtn;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,6 +80,5 @@ public class GoogleSignInFragment extends Fragment {
         // Use the NavController to navigate back to the previous fragment
         NavController navController = NavHostFragment.findNavController(this);
         navController.popBackStack(); // Navigate back to the previous fragment
-
     }
 }

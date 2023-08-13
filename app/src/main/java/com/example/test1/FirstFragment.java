@@ -26,6 +26,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.test1.databinding.FragmentFirstBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,7 +43,6 @@ public class FirstFragment extends Fragment {
     private final int CAMERA_PERMISSION_REQUEST_CODE = 101;
     GoogleSignInClient gsc;
     GoogleSignInOptions gso;
-
     private final ActivityResultLauncher<Intent> cameraLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                     result -> {
@@ -78,6 +78,7 @@ public class FirstFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -87,6 +88,10 @@ public class FirstFragment extends Fragment {
                 checkCameraPermission();
             }
         });
+
+        // Check the user's sign-in status and show/hide buttons accordingly
+        checkSignInStatus();
+
         binding.buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,14 +100,29 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_GoogleSignInFragment);
             }
         });
+
         binding.buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signOut();
             }
         });
-
     }
+
+    // Method to check the user's sign-in status and show/hide buttons accordingly
+    private void checkSignInStatus() {
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(requireContext());
+        if (account != null) {
+            // User is signed in, hide the signInButton and show the signOutButton
+            binding.buttonSignIn.setVisibility(View.GONE);
+            binding.buttonSignOut.setVisibility(View.VISIBLE);
+        } else {
+            // User is signed out, show the signInButton and hide the signOutButton
+            binding.buttonSignIn.setVisibility(View.VISIBLE);
+            binding.buttonSignOut.setVisibility(View.GONE);
+        }
+    }
+
 
     private void saveImageToFile(Bitmap i) {
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
