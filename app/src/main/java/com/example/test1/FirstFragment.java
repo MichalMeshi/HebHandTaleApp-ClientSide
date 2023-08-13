@@ -112,7 +112,6 @@ public class FirstFragment extends Fragment {
     // Method to check the user's sign-in status and show/hide buttons accordingly
     private void checkSignInStatus() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(requireContext());
-        System.out.println(account.toString());
         if (account != null) {
             // User is signed in, hide the signInButton and show the signOutButton
             binding.buttonSignIn.setVisibility(View.GONE);

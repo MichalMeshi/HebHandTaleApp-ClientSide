@@ -1,5 +1,7 @@
 package com.example.test1;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,10 +75,12 @@ public class WordDetailsActivity extends AppCompatActivity {
                 String selectedLanguage = languageSpinner.getSelectedItem().toString();
                 String languageCode = languageMap.get(selectedLanguage);
                 String selectedWord = wordTextView.getText().toString().replace("Selected word: ", "");
+                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(WordDetailsActivity.this);
 
                 // Call the translateWord method
                 TranslateAPI translateAPI = new TranslateAPI();
-                translateAPI.translateWord(selectedWord, languageCode, new TranslateAPI.TranslationCallback() {
+                assert acct != null;
+                translateAPI.translateWord(selectedWord, languageCode,selectedLanguage,acct.getIdToken(), new TranslateAPI.TranslationCallback() {
                     @Override
                     public void onTranslationSuccess(String translation) {
                         // Handle the successful translation result
@@ -202,7 +209,7 @@ public class WordDetailsActivity extends AppCompatActivity {
         languageMap.put("Xhosa", "xh");
         languageMap.put("Yiddish", "yi");
         languageMap.put("Yoruba", "yo");
-        languageMap.put("Zulu", "zu");    }
+        languageMap.put("Zulu", "zu"); }
 
     private void displayLanguageCode(String code) {
         // Display the language code
