@@ -14,12 +14,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -45,6 +45,8 @@ public class FirstFragment extends Fragment {
     private final int CAMERA_PERMISSION_REQUEST_CODE = 101;
     GoogleSignInClient gsc;
     GoogleSignInOptions gso;
+    ImageView historyBtn;
+
     private final ActivityResultLauncher<Intent> cameraLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                     result -> {
@@ -90,7 +92,28 @@ public class FirstFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        // Find the ImageView by its ID within the inflated layout
+        historyBtn = view.findViewById(R.id.history_btn);
+        // Set up click listener for the ImageView
+        historyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the history button click
+                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(requireContext());
+                if (acct != null) {
+                    String userEmail = acct.getEmail();
+                    // Create an intent to start the HistoryDisplayActivity
+                    Intent historyIntent = new Intent(requireContext(), com.example.test1.HistoryDisplayActivity.class);
+                    // Pass user email as an extra to the HistoryDisplayActivity
+                    historyIntent.putExtra("user_email", userEmail);
+                    // Start the HistoryDisplayActivity
+                    startActivity(historyIntent);
+                } else {
+                    // Handle the case when the user is not signed in
+                    // You may want to show a message or take other actions
+                }
+            }
+        });
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -41,7 +41,10 @@
             android:name=".TranslationDisplayActivity"
             android:label="Hebrew App">
         </activity>
-
+        <activity
+            android:name=".HistoryDisplayActivity"
+            android:label="Hebrew App">
+        </activity>
         <activity
             android:name=".GoogleSignInFragment"
             android:label="Hebrew App">
