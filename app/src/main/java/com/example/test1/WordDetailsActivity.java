@@ -76,11 +76,11 @@ public class WordDetailsActivity extends AppCompatActivity {
                 String languageCode = languageMap.get(selectedLanguage);
                 String selectedWord = wordTextView.getText().toString().replace("Selected word: ", "");
                 GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(WordDetailsActivity.this);
-
+                System.out.println(acct.getEmail());
                 // Call the translateWord method
                 TranslateAPI translateAPI = new TranslateAPI();
                 assert acct != null;
-                translateAPI.translateWord(selectedWord, languageCode,selectedLanguage,acct.getIdToken(), new TranslateAPI.TranslationCallback() {
+                translateAPI.translateWord(selectedWord, languageCode,selectedLanguage,acct.getEmail(), new TranslateAPI.TranslationCallback() {
                     @Override
                     public void onTranslationSuccess(String translation) {
                         // Handle the successful translation result
