@@ -6,18 +6,6 @@ import android.util.Log;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -66,18 +54,23 @@ public class TranslateAPI {
                     .get()
                     .build();
 
-            try {
-                Response response = client.newCall(request).execute();
-                if (response.isSuccessful()) {
-                    return response.body().string();
-                } else {
-                    return "Translation failed. Status code: " + response.code();
+                try {
+                    Response response = client.newCall(request).execute();
+                    try {
+                        if (response.isSuccessful()) {
+                            return response.body().string();
+                        } else {
+                            return "Translation failed. Status code: " + response.code();
+                        }
+                    } finally {
+                        response.close(); // Close the response body to release resources
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "Translation failed. Exception: " + e.getMessage();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "Translation failed. Exception: " + e.getMessage();
+
             }
-        }
 
         @Override
         protected void onPostExecute(String result) {

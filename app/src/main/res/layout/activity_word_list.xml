@@ -50,7 +50,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/fab_background" />
+        android:src="@drawable/home" />
 
 
 </RelativeLayout>
