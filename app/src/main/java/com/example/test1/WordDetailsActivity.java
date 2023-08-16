@@ -68,6 +68,8 @@ public class WordDetailsActivity extends AppCompatActivity {
                 // Do nothing
             }
         });
+        // Inside your translateButton OnClickListener
+        // Inside your translateButton OnClickListener
         translateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,23 +77,18 @@ public class WordDetailsActivity extends AppCompatActivity {
                 String selectedLanguage = languageSpinner.getSelectedItem().toString();
                 String languageCode = languageMap.get(selectedLanguage);
                 String selectedWord = wordTextView.getText().toString().replace("Selected word: ", "");
+
+                // Check if the user is signed in
                 GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(WordDetailsActivity.this);
-                System.out.println(acct.getEmail());
-                // Call the translateWord method
+                // Call the translateWord method with the user's account
                 TranslateAPI translateAPI = new TranslateAPI();
-                assert acct != null;
-                translateAPI.translateWord(selectedWord, languageCode,selectedLanguage,acct.getEmail(), new TranslateAPI.TranslationCallback() {
+                translateAPI.translateWord(selectedWord, languageCode, selectedLanguage, acct, new TranslateAPI.TranslationCallback() {
                     @Override
                     public void onTranslationSuccess(String translation) {
-                        // Handle the successful translation result
-                        System.out.println("Translation: " + translation);
-                        // Open a new activity to display the translation
                         Intent translationIntent = new Intent(WordDetailsActivity.this, TranslationDisplayActivity.class);
                         translationIntent.putExtra("translation", translation);
                         startActivity(translationIntent);
-
                     }
-
                     @Override
                     public void onTranslationFailure(String errorMessage) {
                         // Handle the translation failure
@@ -100,7 +97,6 @@ public class WordDetailsActivity extends AppCompatActivity {
                 });
             }
         });
-
     }
 
     private void initializeLanguageMap() {

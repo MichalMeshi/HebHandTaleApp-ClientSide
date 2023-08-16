@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- TextView to display the history table -->
-    <TextView
-        android:id="@+id/historyTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="start"
-        android:text="Loading history..."
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="58dp" />
-
-    <!-- Custom back button -->
+    <!-- Button at the top -->
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
@@ -27,4 +15,14 @@
         android:textColor="@color/white"
         android:layout_marginTop="16dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- RecyclerView below the button -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/historyRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:foregroundGravity="center"
+        tools:listitem="@layout/item_history_cell" />
+
+</LinearLayout>

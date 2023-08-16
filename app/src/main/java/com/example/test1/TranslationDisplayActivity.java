@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,7 @@ public class TranslationDisplayActivity extends AppCompatActivity {
 
     private TextView translationTextView;
     private Button returnButton;
-    private Button returnToFirstFragmentButton; // New button for returning to the first fragment
+    private ImageView returnToFirstFragmentButton; // New button for returning to the first fragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class TranslationDisplayActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
 }

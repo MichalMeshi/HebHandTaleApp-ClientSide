@@ -3,29 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="0dp"
     android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/returnToFirstFragmentButton"
+        android:layout_width="71dp"
+        android:layout_height="64dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/home" />
 
     <TextView
         android:id="@+id/translationTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
         android:textSize="24sp"
         android:textStyle="bold" />
+
     <Button
         android:id="@+id/returnButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back to change language"
-        android:textColor="@color/white"
-        android:layout_gravity="center" />
-    <Button
-        android:id="@+id/returnToFirstFragmentButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
-        android:textColor="@color/white"
-        android:layout_gravity="center" />
+        android:layout_height="66dp"
+        android:layout_gravity="bottom|center"
+        android:text="Change language"
+        android:textColor="@color/white" />
 
 </LinearLayout>

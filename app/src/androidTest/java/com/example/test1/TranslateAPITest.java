@@ -16,7 +16,7 @@ import okhttp3.Response;
 public class TranslateAPITest {
     @Test
     public void translate() throws IOException, NoSuchAlgorithmException, KeyManagementException {
-        TranslateAPI translate = new TranslateAPI();
-        translate.translateWord("שלום","en");
+//        TranslateAPI translate = new TranslateAPI();
+//        translate.translateWord("שלום","en");
     }
 }

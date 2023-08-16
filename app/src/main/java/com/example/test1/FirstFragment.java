@@ -145,18 +145,21 @@ public class FirstFragment extends Fragment {
     private void checkSignInStatus() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(requireContext());
         if (account != null) {
-            // User is signed in, hide the signInButton and show the signOutButton
+            // User is signed in, hide the signInButton and show the signOutButton and historyButton
             binding.buttonSignIn.setVisibility(View.GONE);
             binding.buttonSignOut.setVisibility(View.VISIBLE);
+            historyBtn.setVisibility(View.VISIBLE); // Show history button
         } else {
-            // User is signed out, show the signInButton and hide the signOutButton
+            // User is signed out, show the signInButton and hide the signOutButton and historyButton
             binding.buttonSignIn.setVisibility(View.VISIBLE);
             binding.buttonSignOut.setVisibility(View.GONE);
+            historyBtn.setVisibility(View.GONE); // Hide history button
         }
     }
 
 
-    private void saveImageToFile(Bitmap i) {
+
+    private void saveImageToFile(Bitmap u) {
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);

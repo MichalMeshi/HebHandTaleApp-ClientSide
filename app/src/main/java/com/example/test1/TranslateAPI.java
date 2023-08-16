@@ -33,28 +33,33 @@ public class TranslateAPI {
         void onTranslationFailure(String errorMessage);
     }
 
-    public void translateWord(String word, String languageCode,String language,String user, TranslationCallback callback) {
-        new TranslationTask(callback).execute(word, languageCode, language, user);
+    public void translateWord(String word, String languageCode, String language, GoogleSignInAccount acct, TranslationCallback callback) {
+        new TranslationTask(callback).execute(word, languageCode, language, acct);
     }
 
-    private static class TranslationTask extends AsyncTask<String, Void, String> {
-        private TranslationCallback callback;
 
-        public TranslationTask(TranslationCallback callback) {
-            this.callback = callback;
-        }
+        private static class TranslationTask extends AsyncTask<Object, Void, String> {
+            private TranslationCallback callback;
 
-        @Override
-        protected String doInBackground(String... params) {
-            String word = params[0];
-            String languageCode = params[1];
-            String language = params[2];
-            String user = params[3];
+            public TranslationTask(TranslationCallback callback) {
+                this.callback = callback;
+            }
 
-            OkHttpClient client = new OkHttpClient();
+            @Override
+            protected String doInBackground(Object... params) {
+                String word = (String) params[0];
+                String languageCode = (String) params[1];
+                String language = (String) params[2];
+                GoogleSignInAccount acct = (GoogleSignInAccount) params[3];
 
-            // Build the URL for the GET request
-            String url = BASE_URL + "/translate_word_with_google_api/" + word + "/" + languageCode + "/" + language +"/" + user;
+                OkHttpClient client = new OkHttpClient();
+
+                String url;
+                if (acct != null) {
+                    url = BASE_URL + "/translate_word_with_google_api/" + word + "/" + languageCode + "/" + language + "/" + acct.getEmail();
+                } else {
+                    url = BASE_URL + "/translate_word_with_google_api/" + word + "/" + languageCode + "/" + language;
+                }
 
             Request request = new Request.Builder()
                     .url(url)
@@ -85,4 +90,5 @@ public class TranslateAPI {
             }
         }
     }
+
 }
