@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -46,6 +47,7 @@ public class FirstFragment extends Fragment {
     GoogleSignInClient gsc;
     GoogleSignInOptions gso;
     ImageView historyBtn;
+    TextView history;
 
     private final ActivityResultLauncher<Intent> cameraLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -95,6 +97,8 @@ public class FirstFragment extends Fragment {
         // Find the ImageView by its ID within the inflated layout
         historyBtn = view.findViewById(R.id.history_btn);
         // Set up click listener for the ImageView
+        history = view.findViewById(R.id.history_text);
+
         historyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,17 +153,21 @@ public class FirstFragment extends Fragment {
             binding.buttonSignIn.setVisibility(View.GONE);
             binding.buttonSignOut.setVisibility(View.VISIBLE);
             historyBtn.setVisibility(View.VISIBLE); // Show history button
+            history.setVisibility(View.VISIBLE);
         } else {
             // User is signed out, show the signInButton and hide the signOutButton and historyButton
             binding.buttonSignIn.setVisibility(View.VISIBLE);
             binding.buttonSignOut.setVisibility(View.GONE);
             historyBtn.setVisibility(View.GONE); // Hide history button
+            history.setVisibility(View.GONE);
+
+
         }
     }
 
 
 
-    private void saveImageToFile(Bitmap u) {
+    private void saveImageToFile(Bitmap i) {
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hello);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
