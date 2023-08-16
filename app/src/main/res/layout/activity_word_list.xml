@@ -1,29 +1,22 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/returnToFirstFragmentButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/home" />
     <!-- TextView for the first word -->
     <TextView
         android:id="@+id/wordTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text=""
+        android:textSize="15dp"
         android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:background="@drawable/rectangle_background"
         android:padding="8dp"
         android:clickable="true"
-        android:cursorVisible="false"
+        android:cursorVisible="true"
         android:textIsSelectable="true"/>
 
     <!-- TextView for the message -->
@@ -31,17 +24,33 @@
         android:id="@+id/messageTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/wordTextView"
+        android:layout_margin="5dp"
+        android:gravity="center"
         android:text="More Words..."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_below="@id/messageTextView"
+        android:layout_above="@id/returnToFirstFragmentButton"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/returnToFirstFragmentButton"
+        android:layout_width="60dp"
+        android:layout_height="62dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/fab_background" />
+
+
+</RelativeLayout>

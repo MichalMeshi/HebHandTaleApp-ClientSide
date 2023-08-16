@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -87,8 +89,9 @@ public class WordListActivity extends AppCompatActivity {
 
     private void setupListView() {
         ArrayList<String> restOfWordList = new ArrayList<>(wordList.subList(1, wordList.size()));
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, restOfWordList);
+        CustomListAdapter adapter = new CustomListAdapter(this, restOfWordList);
         listView.setAdapter(adapter);
+
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             handleWordClick(restOfWordList.get(position));

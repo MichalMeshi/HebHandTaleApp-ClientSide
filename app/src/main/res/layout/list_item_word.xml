@@ -1,4 +1,3 @@
-<!-- res/layout/list_item_word.xml -->
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/wordText"
@@ -6,4 +5,5 @@
     android:layout_height="wrap_content"
     android:textSize="16sp"
     android:padding="16dp"
-    android:textColor="@android:color/black" />
+    android:textColor="#000000"
+    android:background="@android:color/white" />
