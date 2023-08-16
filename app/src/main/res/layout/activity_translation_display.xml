@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/returnToFirstFragmentButton"
-            android:layout_width="80dp"
-            android:layout_height="69dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/home" />
 
         <TextView
@@ -39,7 +39,7 @@
         android:layout_weight="1"
         android:layout_gravity="center_horizontal"
         android:gravity="center_vertical"
-        android:textSize="35sp"
+        android:textSize="28sp"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
