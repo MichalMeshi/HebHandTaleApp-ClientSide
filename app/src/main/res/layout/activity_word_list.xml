@@ -4,20 +4,49 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <!-- ImageView for "Home" at the top -->
+    <ImageView
+        android:id="@+id/returnToFirstFragmentButtonTop"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/home" />
+
+    <!-- TextView for "Home" at the top -->
+
     <!-- TextView for the first word -->
+    <TextView
+        android:id="@+id/home_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/returnToFirstFragmentButtonTop"
+        android:layout_marginStart="-48dp"
+        android:layout_marginBottom="-23dp"
+        android:layout_toEndOf="@id/returnToFirstFragmentButtonTop"
+        android:text="Home"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
     <TextView
         android:id="@+id/wordTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="15dp"
-        android:textColor="@color/white"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_below="@id/home_text"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/rectangle_background"
-        android:padding="8dp"
         android:clickable="true"
         android:cursorVisible="true"
-        android:textIsSelectable="true"/>
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/white"
+        android:textIsSelectable="true"
+        android:textSize="15dp" />
 
     <!-- TextView for the message -->
     <TextView
@@ -32,25 +61,13 @@
         android:textColor="@color/black"
         android:textSize="18sp" />
 
+    <!-- ListView positioned below all elements -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/messageTextView"
-        android:layout_above="@id/returnToFirstFragmentButton"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1" />
-
-    <ImageView
-        android:id="@+id/returnToFirstFragmentButton"
-        android:layout_width="60dp"
-        android:layout_height="62dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/home" />
-
+        android:layout_marginBottom="8dp" />
 
 </RelativeLayout>

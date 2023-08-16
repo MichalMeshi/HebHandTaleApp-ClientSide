@@ -40,7 +40,7 @@ public class WordListActivity extends AppCompatActivity {
     private void initViews() {
         wordTextView = findViewById(R.id.wordTextView);
         listView = findViewById(R.id.listView);
-        returnToFirstFragmentButton = findViewById(R.id.returnToFirstFragmentButton);
+        returnToFirstFragmentButton = findViewById(R.id.returnToFirstFragmentButtonTop);
     }
 
     private void processJsonResponse() {
