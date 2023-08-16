@@ -16,6 +16,7 @@ public class TranslationDisplayActivity extends AppCompatActivity {
     private Button returnButton;
     private ImageView returnToFirstFragmentButton; // New button for returning to the first fragment
 
+    private TextView home_text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +25,7 @@ public class TranslationDisplayActivity extends AppCompatActivity {
         translationTextView = findViewById(R.id.translationTextView);
         returnButton = findViewById(R.id.returnButton);
         returnToFirstFragmentButton = findViewById(R.id.returnToFirstFragmentButton); // Initialize the new button
-
+        home_text = findViewById(R.id.home_text);
         // Get the translation from the intent
         Intent intent = getIntent();
         String translation = intent.getStringExtra("translation");
