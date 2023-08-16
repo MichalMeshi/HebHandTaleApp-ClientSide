@@ -43,7 +43,7 @@ public class WordDetailsActivity extends AppCompatActivity {
         // Get the selected word from the intent
         Intent intent = getIntent();
         String selectedWord = intent.getStringExtra("selectedWord");
-        wordTextView.setText("Selected word: " + selectedWord);
+        wordTextView.setText(selectedWord);
 
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>(languageMap.keySet()));
