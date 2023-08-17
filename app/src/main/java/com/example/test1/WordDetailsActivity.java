@@ -76,7 +76,7 @@ public class WordDetailsActivity extends AppCompatActivity {
                 // Get the selected language and the word from the UI
                 String selectedLanguage = languageSpinner.getSelectedItem().toString();
                 String languageCode = languageMap.get(selectedLanguage);
-                String selectedWord = wordTextView.getText().toString().replace("Selected word: ", "");
+                String selectedWord = wordTextView.getText().toString().replace("Text: ", "");
 
                 // Check if the user is signed in
                 GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(WordDetailsActivity.this);
@@ -84,9 +84,10 @@ public class WordDetailsActivity extends AppCompatActivity {
                 TranslateAPI translateAPI = new TranslateAPI();
                 translateAPI.translateWord(selectedWord, languageCode, selectedLanguage, acct, new TranslateAPI.TranslationCallback() {
                     @Override
-                    public void onTranslationSuccess(String translation) {
+                    public void onTranslationSuccess(String translation,String audioUrl) {
                         Intent translationIntent = new Intent(WordDetailsActivity.this, TranslationDisplayActivity.class);
                         translationIntent.putExtra("translation", translation);
+                        translationIntent.putExtra("audio_url", audioUrl); // Add the audio URL to the intent extras
                         startActivity(translationIntent);
                     }
                     @Override

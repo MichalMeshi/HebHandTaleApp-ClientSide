@@ -43,6 +43,14 @@
         android:textColor="@color/black"
         android:textStyle="bold" />
 
+    <ImageView
+        android:id="@+id/audioBtn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/voice" />
+
     <Button
         android:id="@+id/returnButton"
         android:layout_width="168dp"

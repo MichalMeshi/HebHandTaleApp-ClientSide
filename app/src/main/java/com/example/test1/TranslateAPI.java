@@ -7,6 +7,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -17,7 +20,7 @@ public class TranslateAPI {
     private static final String BASE_URL = "http:/192.168.68.110:5000";
 
     public interface TranslationCallback {
-        void onTranslationSuccess(String translation);
+        void onTranslationSuccess(String translation, String audioUrl);
         void onTranslationFailure(String errorMessage);
     }
 
@@ -25,14 +28,12 @@ public class TranslateAPI {
         new TranslationTask(callback).execute(word, languageCode, language, acct);
     }
 
+    private static class TranslationTask extends AsyncTask<Object, Void, String> {
+        private TranslationCallback callback;
 
-        private static class TranslationTask extends AsyncTask<Object, Void, String> {
-            private TranslationCallback callback;
-
-            public TranslationTask(TranslationCallback callback) {
-                this.callback = callback;
-            }
-
+        public TranslationTask(TranslationCallback callback) {
+            this.callback = callback;
+        }
             @Override
             protected String doInBackground(Object... params) {
                 String word = (String) params[0];
@@ -72,16 +73,25 @@ public class TranslateAPI {
 
             }
 
+
         @Override
         protected void onPostExecute(String result) {
             if (callback != null) {
                 if (result.startsWith("Translation failed")) {
                     callback.onTranslationFailure(result);
                 } else {
-                    callback.onTranslationSuccess(result);
+                    try {
+                        JSONObject jsonResponse = new JSONObject(result);
+                        String translation = jsonResponse.optString("translation");
+                        String audioUrl = jsonResponse.optString("audio_url");
+                        System.out.println(audioUrl);
+                        callback.onTranslationSuccess(translation, audioUrl);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        callback.onTranslationFailure("Failed to parse response.");
+                    }
                 }
             }
         }
     }
-
 }
