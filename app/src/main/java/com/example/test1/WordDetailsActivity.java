@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class WordDetailsActivity extends AppCompatActivity {
     private TextView wordTextView;
     private Button translateButton;
     private TextView translationTextView;
+    private ImageView returnToFirstFragmentButton;
 
     private Map<String, String> languageMap;
 
@@ -38,6 +40,7 @@ public class WordDetailsActivity extends AppCompatActivity {
         wordTextView = findViewById(R.id.wordTextView);
         languageSpinner = findViewById(R.id.languageSpinner);
         translateButton = findViewById(R.id.translateButton);
+        returnToFirstFragmentButton = findViewById(R.id.returnToFirstFragmentButton);
         initializeLanguageMap();
 
         // Get the selected word from the intent
@@ -98,6 +101,16 @@ public class WordDetailsActivity extends AppCompatActivity {
                 });
             }
         });
+        returnToFirstFragmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WordDetailsActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     private void initializeLanguageMap() {

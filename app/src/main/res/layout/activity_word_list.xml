@@ -44,7 +44,7 @@
         android:cursorVisible="true"
         android:padding="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textIsSelectable="true"
         android:textSize="15dp" />
 
@@ -54,9 +54,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/wordTextView"
-        android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="More Words..."
+        android:text="Not what you meant? Here are some similar words:"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         android:textSize="18sp" />

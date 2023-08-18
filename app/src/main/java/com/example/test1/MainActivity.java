@@ -46,13 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 animationView.setVisibility(View.GONE); // Hide animation in other fragments
             }
         });
-//        binding.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     @Override
@@ -83,10 +76,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        animationView.cancelAnimation(); // Stop the animation
-//        Log.d("Animation", "Animation stopped");
-//    }
+
 }
