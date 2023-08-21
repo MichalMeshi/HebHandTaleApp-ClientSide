@@ -85,7 +85,7 @@ public class FirstFragment extends Fragment {
         if (activity != null) {
             ActionBar actionBar = activity.getSupportActionBar();
             if (actionBar != null) {
-                actionBar.setTitle("Hebrew App");
+                actionBar.setTitle("HebHandTale");
             }
         }
         return binding.getRoot();

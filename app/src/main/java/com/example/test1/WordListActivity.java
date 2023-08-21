@@ -1,6 +1,7 @@
 package com.example.test1;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -8,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,7 +33,11 @@ public class WordListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_list);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            int barColor = ContextCompat.getColor(this, R.color.barColor);
+            actionBar.setBackgroundDrawable(new ColorDrawable(barColor));
+        }
         initViews();
         processJsonResponse();
         setupWordTextView();

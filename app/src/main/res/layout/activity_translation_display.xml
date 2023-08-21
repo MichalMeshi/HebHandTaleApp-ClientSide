@@ -74,6 +74,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="60dp"
         android:text="Change language"
+        android:backgroundTint="@android:color/holo_red_light"
         android:textColor="@color/white"
         android:textSize="20sp" />
 

@@ -3,6 +3,7 @@ package com.example.test1;
 import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -35,7 +38,11 @@ public class WordDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_details);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            int barColor = ContextCompat.getColor(this, R.color.barColor);
+            actionBar.setBackgroundDrawable(new ColorDrawable(barColor));
+        }
         // Initialize views
         wordTextView = findViewById(R.id.wordTextView);
         languageSpinner = findViewById(R.id.languageSpinner);

@@ -1,6 +1,7 @@
 package com.example.test1;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class TranslationDisplayActivity extends AppCompatActivity {
 
@@ -26,7 +29,11 @@ public class TranslationDisplayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translation_display);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            int barColor = ContextCompat.getColor(this, R.color.barColor);
+            actionBar.setBackgroundDrawable(new ColorDrawable(barColor));
+        }
         translationTextView = findViewById(R.id.translationTextView);
         returnButton = findViewById(R.id.returnButton);
         returnToFirstFragmentButton = findViewById(R.id.returnToFirstFragmentButton);
@@ -37,7 +44,7 @@ public class TranslationDisplayActivity extends AppCompatActivity {
         String translation = intent.getStringExtra("translation");
         audioUrl = intent.getStringExtra("audio_url"); // Get the audio URL from extras
 
-        translationTextView.setText("Translation: " + translation);
+        translationTextView.setText("Translation:\n" + translation);
 
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/googleSignInFragment"
         android:name="com.example.test1.GoogleSignInFragment"
-        android:label="Hebrew App"
+        android:label="HebHandTale"
         tools:layout="@layout/fragment_google_sign_in" />
     <action
         android:id="@+id/action_FirstFragment_to_GoogleSignInFragment"

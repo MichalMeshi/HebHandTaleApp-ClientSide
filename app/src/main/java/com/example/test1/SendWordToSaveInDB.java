@@ -12,7 +12,7 @@ public class SendWordToSaveInDB {
     // Method to make the GET request and send the word to the server
     public static void sendWordToServer(String word) {
         // Modify the base URL as needed
-        String baseUrl = "http://192.168.68.110:5000/add_word_to_popular_words_db/";
+        String baseUrl = "https://peninaschuss.pythonanywhere.com/add_word_to_popular_words_db/";
         String fullUrl = baseUrl + word;
 
         OkHttpClient client = new OkHttpClient();

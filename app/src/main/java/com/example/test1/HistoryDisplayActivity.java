@@ -1,6 +1,11 @@
 package com.example.test1;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +14,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +34,11 @@ public class HistoryDisplayActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_display);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            int barColor = ContextCompat.getColor(this, R.color.barColor);
+            actionBar.setBackgroundDrawable(new ColorDrawable(barColor));
+        }
 
         historyRecyclerView = findViewById(R.id.historyRecyclerView);
         historyAdapter = new HistoryAdapter();
