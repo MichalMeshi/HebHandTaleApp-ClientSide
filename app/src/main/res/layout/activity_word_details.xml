@@ -43,17 +43,29 @@
         android:textColor="@color/black"
         android:textSize="35sp"
         android:textStyle="bold" />
-
-    <Spinner
-        android:id="@+id/languageSpinner"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/CustomTextInputLayout"
         android:layout_width="291dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:padding="8dp"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textColorHint="@android:color/holo_red_light"
+        android:textColorHighlight="@android:color/holo_red_light" >
+        <AutoCompleteTextView
+            android:id="@+id/languageSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:hint="Select Language"
+            android:textColorHint="@android:color/holo_red_light"
+            android:textColorHighlight="@android:color/holo_red_light" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
 
     <Button
         android:id="@+id/translateButton"

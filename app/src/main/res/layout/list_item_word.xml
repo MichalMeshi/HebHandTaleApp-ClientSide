@@ -1,9 +1,16 @@
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/wordText"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="16sp"
-    android:padding="16dp"
-    android:textColor="#000000"
-    android:background="@android:color/white" />
+    android:padding="8dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/wordText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:background="@drawable/black_frame_background" /> <!-- Apply black frame background directly to TextView -->
+
+</RelativeLayout>

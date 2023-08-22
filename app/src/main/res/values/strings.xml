@@ -6,7 +6,7 @@
     <string name="second_fragment_label">HebHandTale</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="select">Select item</string>
     <string name="hello_first_fragment">Hello Michal</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="placeholder_for_the_selected_word">Placeholder for the selected word</string>

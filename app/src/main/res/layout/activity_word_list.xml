@@ -46,7 +46,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/black"
         android:textIsSelectable="true"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 
     <!-- TextView for the message -->
     <TextView
@@ -59,7 +60,7 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Not what you meant? Here are some similar words:"
+        android:text="Not what you meant?\nHere are some similar words:"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         android:textSize="18sp" />

@@ -5,7 +5,9 @@ import static androidx.core.content.ContentProviderCompat.requireContext;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +29,7 @@ import java.util.Map;
 
 public class WordDetailsActivity extends AppCompatActivity {
 
-    private Spinner languageSpinner;
+    private MaterialAutoCompleteTextView languageSpinner;
     private TextView wordTextView;
     private Button translateButton;
     private TextView translationTextView;
@@ -43,9 +46,8 @@ public class WordDetailsActivity extends AppCompatActivity {
             int barColor = ContextCompat.getColor(this, R.color.barColor);
             actionBar.setBackgroundDrawable(new ColorDrawable(barColor));
         }
-        // Initialize views
-        wordTextView = findViewById(R.id.wordTextView);
         languageSpinner = findViewById(R.id.languageSpinner);
+        wordTextView = findViewById(R.id.wordTextView);
         translateButton = findViewById(R.id.translateButton);
         returnToFirstFragmentButton = findViewById(R.id.returnToFirstFragmentButton);
         initializeLanguageMap();
@@ -56,7 +58,7 @@ public class WordDetailsActivity extends AppCompatActivity {
         wordTextView.setText("Text: " + selectedWord);
 
 // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>(languageMap.keySet()));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_dropdown_item, new ArrayList<>(languageMap.keySet()));
 
 // Specify the layout to use for the dropdown items
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,7 +86,7 @@ public class WordDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Get the selected language and the word from the UI
-                String selectedLanguage = languageSpinner.getSelectedItem().toString();
+                String selectedLanguage = languageSpinner.getText().toString();
                 String languageCode = languageMap.get(selectedLanguage);
                 String selectedWord = wordTextView.getText().toString().replace("Text: ", "");
 

@@ -2,5 +2,16 @@
 <resources>
     <style name="CustomSpinnerItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
     <item name="android:textSize">35sp</item>
-</style>
+    </style>
+    <style name="CustomSpinnerItem" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@android:color/holo_red_light</item> <!-- Set the outline box color to red -->
+        <item name="android:textColorHint">@android:color/holo_red_light</item>
+
+    </style>
+
 </resources>

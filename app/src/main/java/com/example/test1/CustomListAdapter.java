@@ -1,6 +1,7 @@
 package com.example.test1;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,3 +35,4 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         return view;
     }
 }
+
