@@ -17,7 +17,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class TranslateAPI {
-    private static final String BASE_URL = "https://peninaschuss.pythonanywhere.com";
+    private static final String BASE_URL = "https://PORT:IP";
 
     public interface TranslationCallback {
         void onTranslationSuccess(String translation, String audioUrl);
