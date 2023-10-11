@@ -19,7 +19,7 @@ The google sign-in require to configure the project in Google API Console and co
 
 **Run the application**
 In order to run the application you need to download the server side from here: https://github.com/PeninaSchuss/HebHandTaleApp-ServerSide, and look in the README there to know how to run the server.
-There is option to run the app with emulator. ypu can see how to do it here: https://developer.android.com/studio/run/managing-avds.
+There is option to run the app with emulator. you can see how to do it here: https://developer.android.com/studio/run/managing-avds.
 and another option to run the app with physical device. you can see how to do it here: https://developer.android.com/studio/run/device.
 after that, you just need to run the file MainActivity.java in order to run this appliction.
 
