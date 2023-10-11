@@ -6,7 +6,7 @@
         </trust-anchors>
     </base-config>
     <domain-config>
-        <domain includeSubdomains="true">peninaschuss.pythonanywhere.com</domain>
+        <domain includeSubdomains="true">IP:PORT</domain>
         <!-- Add more domains or custom settings as needed -->
     </domain-config>
 </network-security-config>
