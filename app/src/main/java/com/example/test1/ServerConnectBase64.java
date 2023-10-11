@@ -59,7 +59,7 @@ public class ServerConnectBase64 {
 
     // This method should be called from an Activity or Fragment
     static void sendBase64ImgToServer(Context context, String base64Image) {
-        String url = "https://peninaschuss.pythonanywhere.com/recognize_word_by_content";
+        String url = "https://PORT:IP/recognize_word_by_content";
         MediaType mediaType = MediaType.parse("image/png"); // Or image/jpeg, depending on the image format
         RequestBody requestBody = RequestBody.create(base64Image, mediaType);
         Request request = new Request.Builder()
