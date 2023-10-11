@@ -17,7 +17,7 @@ public class HistoryTableConnection {
 
     public static void getHistoryTableOfUser(String user, HistoryTableCallback callback) {
         // Define the URL you want to make a GET request to
-        String url = "https://peninaschuss.pythonanywhere.com/get_history_by_user/" + user;
+        String url = "https://PORT:IP/get_history_by_user/" + user;
 
         // Create an AsyncTask to perform the network request in the background
         new AsyncTask<String, Void, String>() {
