@@ -18,6 +18,6 @@ The google sign-in require to configure the project in Google API Console and co
 
 **Run the application**
 In order to run the application you need to download the server side from here: https://github.com/PeninaSchuss/HebHandTaleApp-ServerSide, and look in the README there to know how to run the server.
-after that, you just need to run the client side - this project in the file .
+after that, you just need to run the client side - this project in the file MainActivity.java.
 
 
